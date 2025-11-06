@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Máquina de Turing </title>
+  <link rel="icon" type="image/png" href="icono.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>CADENAS BINARIAS.</h1>
+  </header>
+
+  <p class="small">
+    Descripción: escriba en la cinta dos cadenas binarias separadas por un blanco 
+    (ej: <code>110 110</code>) — la máquina marcará si son iguales.
+  </p>
+
+  <div class="controls">
+    <input id="inputW" type="text" placeholder="Ingrese dos cadenas separadas por un espacio. Ej: 110 110" value="110 110">
+    <button id="loadBtn">Cargar</button>
+    <button id="stepBtn">Paso</button>
+    <button id="runBtn">Ejecutar</button>
+    <button id="resetBtn" class="secondary">Reset</button>
+  </div>
+
+  <div class="tape" id="tape"></div>
+
+  <div id="status" class="status info">
+    Estado: <span id="state">--</span> — Cabezal en posición: <span id="headPos">--</span>
+  </div>
+
+  <div id="history" class="status info" style="margin-top:10px;">
+    <b>Secuencia de estados:</b> —
+  </div>
+
+  <!-- 🔹 Bloque de documentación en tres columnas -->
+  <section class="doc-grid">
+    <div class="card">
+      <h2>Descripción formal (séptupla)</h2>
+      <pre class="small">
+M = (Q, Σ, Γ, b, q0, F, δ)
+Q = {q0, q1, q2, q3, q4, q5, q6, q7, q8}
+Σ = {0,1,' '} 
+Γ = {0,1,A,B,'_',' '}
+b = '_'
+q0 = estado inicial
+F = {q_3}
+δ = función de transición
+      </pre>
+    </div>
+
+    <div class="card">
+      <h2>Lenguaje</h2>
+      <p class="small">L = { w ␣ x | w,x ∈ {0,1}* y w = x }</p>
+    </div>
+
+    <div class="card">
+      <h2>Descripción instantánea (DI)</h2>
+      <p class="small"><strong>Ejemplo:</strong> entrada <code>110 110</code></p>
+      <pre class="small">
+(q0, 110 110) → marcar '1' → (q_mark_right, A01 101)
+→ marcar '1' derecha → (q_return, A01 1A1)
+→ repetir hasta (q_check_end, AAA 1AA) → q_accept
+      </pre>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+

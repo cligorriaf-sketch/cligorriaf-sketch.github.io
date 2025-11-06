@@ -1,0 +1,53 @@
+/* 🔹 Fondo general con imagen */
+body {
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  padding: 18px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-image: url('1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.199);
+  z-index: -1;
+}
+
+/* 🔹 Diseño de los 3 bloques */
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #3130304d;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  backdrop-filter: blur(5px);
+}
+
+pre {
+  background: #3130304d;
+  padding: 10px;
+  border-radius: 6px;
+  overflow: auto;
+}
+
+.small {
+  font-size: 0.9rem;
+  color: #000000;
+}
+
+
+
+
