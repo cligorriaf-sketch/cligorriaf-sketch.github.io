@@ -3,66 +3,76 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Máquina de Turing </title>
+  <title>Simulador de Máquina de Turing</title>
   <link rel="icon" type="image/png" href="icono.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>CADENAS BINARIAS.</h1>
+    <h1>Comparación de Cadenas Binarias</h1>
   </header>
 
   <p class="small">
-    Descripción: escriba en la cinta dos cadenas binarias separadas por un blanco 
-    (ej: <code>110 110</code>) — la máquina marcará si son iguales.
+    💡 <strong>Instrucción:</strong> Ingrese en la cinta dos cadenas binarias separadas por un espacio.  
+    Ejemplo: <code>110 110</code> — la máquina verificará si ambas son iguales.
   </p>
 
   <div class="controls">
-    <input id="inputW" type="text" placeholder="Ingrese dos cadenas separadas por un espacio. Ej: 110 110" value="110 110">
+    <input id="inputW" type="text" placeholder="Ej: 110 110" value="110 110">
     <button id="loadBtn">Cargar</button>
     <button id="stepBtn">Paso</button>
     <button id="runBtn">Ejecutar</button>
-    <button id="resetBtn" class="secondary">Reset</button>
+    <button id="resetBtn" class="secondary">Reiniciar</button>
+    <!-- 🔹 Nuevo botón para abrir carpeta de Drive -->
+    <button id="driveBtn" class="secondary" onclick="window.open('https://drive.google.com/drive/folders/1XMWVEAhhv-1bCLT4Pmr9g4lY7cg35xLi?usp=sharing', '_blank')">
+      📂 Abrir Carpeta Drive
+    </button>
   </div>
 
   <div class="tape" id="tape"></div>
 
   <div id="status" class="status info">
-    Estado: <span id="state">--</span> — Cabezal en posición: <span id="headPos">--</span>
+    Estado actual: <span id="state">--</span> — Posición del cabezal: <span id="headPos">--</span>
   </div>
 
   <div id="history" class="status info" style="margin-top:10px;">
-    <b>Secuencia de estados:</b> —
+    <b>Historial de estados:</b> —
   </div>
 
-  <!-- 🔹 Bloque de documentación en tres columnas -->
+  <!-- 🔹 Sección de documentación -->
   <section class="doc-grid">
     <div class="card">
-      <h2>Descripción formal (séptupla)</h2>
+      <h2>Descripción Formal (Séptupla)</h2>
       <pre class="small">
-M = (Q, Σ, Γ, b, q0, F, δ)
+M = (Q, Σ, Γ, b, q₀, F, δ)
 Q = {q0, q1, q2, q3, q4, q5, q6, q7, q8}
-Σ = {0,1,' '} 
-Γ = {0,1,A,B,'_',' '}
+Σ = {0, 1, ' '}
+Γ = {0, 1, A, B, '_', ' '}
 b = '_'
-q0 = estado inicial
-F = {q_3}
+q₀ = estado inicial
+F = {q₃}
 δ = función de transición
       </pre>
     </div>
 
     <div class="card">
-      <h2>Lenguaje</h2>
-      <p class="small">L = { w ␣ x | w,x ∈ {0,1}* y w = x }</p>
+      <h2>Lenguaje Reconocido</h2>
+      <p class="small">
+        L = { w ␣ x | w, x ∈ {0,1}*  y  w = x }
+      </p>
+      <img src="automata.png" alt="Diagrama del autómata de la máquina de Turing" class="example-img">
+      <p class="small" style="text-align:center; margin-top:6px;">
+        <em>Figura 1:</em> Diagrama de estados del autómata utilizado.
+      </p>
     </div>
 
     <div class="card">
-      <h2>Descripción instantánea (DI)</h2>
-      <p class="small"><strong>Ejemplo:</strong> entrada <code>110 110</code></p>
+      <h2>Ejemplo de Descripción Instantánea (DI)</h2>
+      <p class="small"><strong>Entrada:</strong> <code>110 110</code></p>
       <pre class="small">
-(q0, 110 110) → marcar '1' → (q_mark_right, A01 101)
-→ marcar '1' derecha → (q_return, A01 1A1)
-→ repetir hasta (q_check_end, AAA 1AA) → q_accept
+(q0, 110 110) → marca '1' → (q₁, A10 110)
+→ avanza y marca siguiente '1' → (q₂, A10 1A0)
+→ continúa hasta (q₃, AAA 1AA) → acepta
       </pre>
     </div>
   </section>
@@ -70,6 +80,7 @@ F = {q_3}
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
